@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://dlejo0ohjmie2" path="res://game-background-4956017_1280.webp" id="1_8t6u1"]
 [ext_resource type="Script" path="res://character_body_2d.gd" id="2_dpq1c"]
 [ext_resource type="Texture2D" uid="uid://cv4ueyw2a51po" path="res://Silly guy.png" id="3_x30nt"]
-[ext_resource type="Texture2D" uid="uid://nxgemfljtc7n" path="res://Tileset 1.png" id="3_xm6ri"]
-[ext_resource type="Texture2D" uid="uid://5ec6b2ocl51t" path="res://Tileset 2.png" id="4_xr8dn"]
+[ext_resource type="Texture2D" uid="uid://nxgemfljtc7n" path="res://Tilesets/Tileset 1.png" id="3_xm6ri"]
+[ext_resource type="Texture2D" uid="uid://5ec6b2ocl51t" path="res://Tilesets/Tileset 2.png" id="4_xr8dn"]
 [ext_resource type="Texture2D" uid="uid://b6pw28law07bj" path="res://icon.svg" id="6_06mry"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_73hdo"]
