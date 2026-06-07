@@ -1,4 +1,6 @@
 extends CharacterBody2D
+@onready var Player_Character: CharacterBody2D = $Player_Character
+@onready var SpawnPoint: Node2D = $SpawnPoint
 
 
 const SPEED = 300.0
@@ -36,3 +38,16 @@ func _physics_process(delta: float) -> void:
 				# Apply the force to the block at the point of impact
 				# The '100.0' is the strength of your push
 				collider.apply_central_impulse(push_dir * 100.0)
+
+
+func _on_death_zone_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+# Check if the object that fell into the zone is actually the player
+	if body == Player_Character:
+		respawn_player()
+
+func respawn_player() -> void:
+	# 1. Reset the player's position to the spawn point
+	Player_Character.global_position = SpawnPoint.global_position
+	
+	# 2. Reset the player's velocity so they don't keep falling instantly
+	Player_Character.velocity = Vector2.ZERO
