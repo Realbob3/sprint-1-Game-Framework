@@ -1,21 +1,26 @@
 extends CharacterBody2D
-@onready var Player_Character: CharacterBody2D = $Player_Character
 @onready var SpawnPoint: Node2D = $SpawnPoint
 
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
+var max_jumps = 2
+var jumps_left = 0
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	else:
+		jumps_left = max_jumps
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and jumps_left > 0:
 		velocity.y = JUMP_VELOCITY
-
+		jumps_left -= 1
+		
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("ui_left", "ui_right")
@@ -40,14 +45,15 @@ func _physics_process(delta: float) -> void:
 				collider.apply_central_impulse(push_dir * 100.0)
 
 
-func _on_death_zone_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-# Check if the object that fell into the zone is actually the player
-	if body == Player_Character:
+func _on_death_zone_body_entered(body: Node2D) -> void:
+	# 'self' means this player script
+	if body == self:
 		respawn_player()
 
+# 2. This resets the whole level flawlessly
 func respawn_player() -> void:
-	# 1. Reset the player's position to the spawn point
-	Player_Character.global_position = SpawnPoint.global_position
-	
-	# 2. Reset the player's velocity so they don't keep falling instantly
-	Player_Character.velocity = Vector2.ZERO
+	get_tree().reload_current_scene()
+
+
+func _on_death_zone_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	pass # Replace with function body.
