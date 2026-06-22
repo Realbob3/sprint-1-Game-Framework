@@ -98,6 +98,9 @@ size = Vector2(608, 41.9965)
 script = ExtResource("1_up4m1")
 metadata/_edit_vertical_guides_ = [-32.0]
 
+[node name="Checkpoint" type="Area2D" parent="."]
+position = Vector2(807, 593)
+
 [node name="Parallax2D" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.5, 0.5)
 repeat_times = 10
